@@ -1,5 +1,5 @@
 stages:
-   get_data:
+    get_data:
       cmd: python src/stage01_load_and_save_data.py --config=configs/config.yaml
       deps:
         - src/stage01_load_and_save_data.py
@@ -7,3 +7,14 @@ stages:
         - configs/config.yaml
       outs:
         - data/data.csv
+
+    split_data:
+      cmd: python src/stage02_split_data.py --config=configs/config.yaml
+      deps:
+        - src/stage02_split_data.py
+        - src/utils/common_utils.py
+        - configs/config.yaml
+        - data/data.csv
+      outs:
+        - artifacts/processed_data/train.csv
+        - artifacts/processed_data/test.csv

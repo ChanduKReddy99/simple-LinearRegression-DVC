@@ -47,10 +47,10 @@ if __name__ == "__main__":
         logging.info('\n********************************')
         logging.info('>>>>>> stage 01 load and save data started..!!')
         get_data(parsed_args.config)
-        logging.info('>>>>>> stage 01 load and save data completed..!!<<<<<<<<<\n')
+        logging.info('>>>>>> stage 01 load and save data completed..!!<<<<<<\n')
     
     except Exception as e:
         logging.error(e)
-        logging.error('\n>>>>>> stage 01 load and save data failed...<<<<<<<')
+        logging.error('\n>>>>>> stage 01 load and save data failed...<<<<<<<\n')
 
 
