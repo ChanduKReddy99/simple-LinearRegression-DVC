@@ -1,0 +1,20 @@
+base:
+   project: 'simple-LinearRegression-dvc'
+   test_size: 0.2
+   random_state: 42
+   taget_col: 'Actual_MPG'
+
+remote_data_source:
+    path: 'C:/Users/acreddy/Desktop/ML/cars_milg.csv'    
+
+local_data_source:
+     data_dir: data
+     data_file: data/data.csv
+    
+
+    
+artifacts:
+    artifacts_dir: 'artifacts'
+
+    split_data:
+      
