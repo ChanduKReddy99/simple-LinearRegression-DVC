@@ -7,4 +7,6 @@
 dvc
 scikit-learn
 pandas
+tqdm
+
 
