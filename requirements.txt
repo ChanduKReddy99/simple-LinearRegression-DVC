@@ -1,0 +1,10 @@
+#requirements for project:
+
+#local lib
+-e .
+
+#dependencies
+dvc
+scikit-learn
+pandas
+
