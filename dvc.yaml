@@ -18,3 +18,15 @@ stages:
       outs:
         - artifacts/processed_data/train.csv
         - artifacts/processed_data/test.csv
+
+    train_model:
+      cmd: python src/stage03_train.py --config=configs/config.yaml --params=params.yaml
+      deps:
+        - src/stage03_train.py
+        - src/utils/common_utils.py
+        - configs/config.yaml
+        - params.yaml
+        - artifacts/processed_data/train.csv
+      outs:
+        - artifacts/saved_models/model.joblib
+        - artifacts/reports/params.json

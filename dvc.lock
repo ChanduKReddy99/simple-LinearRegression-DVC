@@ -4,37 +4,62 @@ stages:
     cmd: python src/stage01_load_and_save_data.py --config=configs/config.yaml
     deps:
     - path: configs/config.yaml
-      md5: 020819763c450e8f133486bd389566e0
-      size: 526
+      md5: 4be1f02bdbba8e82b991bb9961a59cbe
+      size: 768
     - path: src/stage01_load_and_save_data.py
       md5: 07fb7d0df9f652085d73f7b61f5c8246
       size: 1832
     - path: src/utils/common_utils.py
-      md5: e503af3cda8fda810ebf2bdf6d937cd0
-      size: 1255
+      md5: ae502d8d8e73e487fc4cfb5418a6dd70
+      size: 1709
     outs:
     - path: data/data.csv
-      md5: 74a101bfab83596cc34889c5c1ce421e
-      size: 11893
+      md5: 0ed20e661f1396b723f088d31fe83b5a
+      size: 10347
   split_data:
     cmd: python src/stage02_split_data.py --config=configs/config.yaml
     deps:
     - path: configs/config.yaml
-      md5: 020819763c450e8f133486bd389566e0
-      size: 526
+      md5: 4be1f02bdbba8e82b991bb9961a59cbe
+      size: 768
     - path: data/data.csv
-      md5: 74a101bfab83596cc34889c5c1ce421e
-      size: 11893
+      md5: 0ed20e661f1396b723f088d31fe83b5a
+      size: 10347
     - path: src/stage02_split_data.py
       md5: 0701c659d337722712aaa9883f33d4bc
       size: 2199
     - path: src/utils/common_utils.py
-      md5: e503af3cda8fda810ebf2bdf6d937cd0
-      size: 1255
+      md5: ae502d8d8e73e487fc4cfb5418a6dd70
+      size: 1709
     outs:
     - path: artifacts/processed_data/test.csv
-      md5: 493c561b84f6f4948d36120db81f8d5c
-      size: 2384
+      md5: 90cf61492ed9bd23aa7f28f55261a150
+      size: 2153
     - path: artifacts/processed_data/train.csv
-      md5: e2a74e1c8c045403a98b938292efbdc3
-      size: 9441
+      md5: 03664d62bac66196987e5a85062b612b
+      size: 8278
+  train_model:
+    cmd: python src/stage03_train.py --config=configs/config.yaml --params=params.yaml
+    deps:
+    - path: artifacts/processed_data/train.csv
+      md5: 03664d62bac66196987e5a85062b612b
+      size: 8278
+    - path: configs/config.yaml
+      md5: 4be1f02bdbba8e82b991bb9961a59cbe
+      size: 768
+    - path: params.yaml
+      md5: e29b4de269e4d309191732b631963729
+      size: 203
+    - path: src/stage03_train.py
+      md5: 49fb8ae97c72a0a8c95ef195c9d5fe01
+      size: 2591
+    - path: src/utils/common_utils.py
+      md5: ae502d8d8e73e487fc4cfb5418a6dd70
+      size: 1709
+    outs:
+    - path: artifacts/reports/params.json
+      md5: 36d60c77efd719a53860bf9ef894a220
+      size: 198
+    - path: artifacts/saved_models/model.joblib
+      md5: cb24e8c51371a51620b139c1a505701a
+      size: 999
