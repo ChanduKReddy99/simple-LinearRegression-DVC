@@ -2,6 +2,7 @@ import os
 import shutil
 import yaml
 import logging
+import json
 
 
 
@@ -37,6 +38,20 @@ def create_dirs(dirs:list) -> None:
 def save_local_df(df, dir_path, header=False) -> None:
     """saves the dataframe to the local directory
     """
-    df.to_csv(dir_path, index=False, header=header)
-    logging.info(f"Saved dataframe to {dir_path}")
+    if header:
+        new_columns= [col.replace(' ', '_') for col in df.columns]
+        df.to_csv(dir_path, index=False, header=new_columns)
+        logging.info(f'dataframe saved at {dir_path} with new headers')
+
+    else:
+        df.to_csv(dir_path, index=False)
+        logging.info(f'dataframe saved at {dir_path}')
+
+
+def save_reports(file_path:str, report:dict):
+    """ this method saves the reports of the model in the reports directory
+    """
+    with open(file_path, 'w') as f:
+        json.dump(report, f, indent=4)
+
 
