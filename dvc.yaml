@@ -30,3 +30,14 @@ stages:
       outs:
         - artifacts/saved_models/model.joblib
         - artifacts/reports/params.json
+
+    eval_model:
+      cmd: python src/stage04_evaluate.py --config=configs/config.yaml
+      deps:
+        - src/stage04_evaluate.py
+        - src/utils/common_utils.py
+        - configs/config.yaml
+        - artifacts/saved_models/model.joblib
+        - artifacts/processed_data/test.csv
+      outs:
+        - artifacts/reports/scores.json

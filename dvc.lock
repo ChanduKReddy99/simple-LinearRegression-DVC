@@ -4,8 +4,8 @@ stages:
     cmd: python src/stage01_load_and_save_data.py --config=configs/config.yaml
     deps:
     - path: configs/config.yaml
-      md5: 4be1f02bdbba8e82b991bb9961a59cbe
-      size: 768
+      md5: c95dd8d2c44376d4ed24c03083a314f8
+      size: 770
     - path: src/stage01_load_and_save_data.py
       md5: 07fb7d0df9f652085d73f7b61f5c8246
       size: 1832
@@ -20,8 +20,8 @@ stages:
     cmd: python src/stage02_split_data.py --config=configs/config.yaml
     deps:
     - path: configs/config.yaml
-      md5: 4be1f02bdbba8e82b991bb9961a59cbe
-      size: 768
+      md5: c95dd8d2c44376d4ed24c03083a314f8
+      size: 770
     - path: data/data.csv
       md5: 0ed20e661f1396b723f088d31fe83b5a
       size: 10347
@@ -45,8 +45,8 @@ stages:
       md5: 03664d62bac66196987e5a85062b612b
       size: 8278
     - path: configs/config.yaml
-      md5: 4be1f02bdbba8e82b991bb9961a59cbe
-      size: 768
+      md5: c95dd8d2c44376d4ed24c03083a314f8
+      size: 770
     - path: params.yaml
       md5: e29b4de269e4d309191732b631963729
       size: 203
@@ -63,3 +63,25 @@ stages:
     - path: artifacts/saved_models/model.joblib
       md5: cb24e8c51371a51620b139c1a505701a
       size: 999
+  eval_model:
+    cmd: python src/stage04_evaluate.py --config=configs/config.yaml
+    deps:
+    - path: artifacts/processed_data/test.csv
+      md5: 90cf61492ed9bd23aa7f28f55261a150
+      size: 2153
+    - path: artifacts/saved_models/model.joblib
+      md5: cb24e8c51371a51620b139c1a505701a
+      size: 999
+    - path: configs/config.yaml
+      md5: c95dd8d2c44376d4ed24c03083a314f8
+      size: 770
+    - path: src/stage04_evaluate.py
+      md5: fd4198de4e425eb927510e9644536a8e
+      size: 2261
+    - path: src/utils/common_utils.py
+      md5: ae502d8d8e73e487fc4cfb5418a6dd70
+      size: 1709
+    outs:
+    - path: artifacts/reports/scores.json
+      md5: e2f51441a646e40654ab2834b2f3e618
+      size: 99
