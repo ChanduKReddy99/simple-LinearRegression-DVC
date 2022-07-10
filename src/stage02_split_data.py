@@ -59,7 +59,7 @@ if __name__ == '__main__':
         logging.info('\n**********************************')
         logging.info('>>>>>> stage 02 split_data started  <<<<<<')
         split_and_save_data(parsed_args.config)
-        logging.info('\n>>>>>> stage 02 split_data finished successfully...<<<<<<\n')
+        logging.info('>>>>>> stage 02 split_data finished successfully...<<<<<<\n')
 
     except Exception as e:
         logging.error(e)
