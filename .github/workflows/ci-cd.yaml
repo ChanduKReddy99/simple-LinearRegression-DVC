@@ -1,0 +1,29 @@
+name: simple-LinearRegression-dvc-ml-pipeline
+
+on: [push]
+
+jobs:
+  run:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - uses: actions/setup-python@v2
+      - uses: iterative/setup-cml@v1
+        with:
+          python_version: '3.7'
+          
+      - name: cml_run
+        env:
+          REPO_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          pip install --upgrade pip
+          pip install -r requirements.txt
+         
+          echo '# REPORTS' >> report.md
+          echo '## Parameters' >> report.md
+          cat artifacts/reports/params.json >> report.md
+          
+          echo '## Metrics' >> report.md
+          cat artifacts/reports/scores.json >> report.md
+          
+          cml send-comment report.md
