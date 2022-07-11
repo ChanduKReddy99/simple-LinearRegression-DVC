@@ -1,7 +1,8 @@
 estimators:
-    LinearRegression:
-       lr_params:
-          intercept: 44.43475319308472
-          coefficients: [-0.63435835,  0.00691163, -0.03921812, -0.00514331,  0.52584555,  2.7139289]
+  LinearRegression:
+    lr_params:
+      intercept: 40.43475319308472
+      coefficients: [-0.53435835, 0.00991163, -0.01921812, -0.0054331, 0.92584555,
+        1.7139289]
 
  
