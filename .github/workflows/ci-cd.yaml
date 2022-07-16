@@ -7,7 +7,7 @@ jobs:
     runs-on: [ubuntu-latest]
     steps:
       - uses: iterative/setup-cml@v1
-      - uses: actions/checkout@v2
+      - uses: actions/checkout@v3
       - name: Deploy runner on EC2
         env:
           REPO_TOKEN: ${{ secrets.DVC_CML_LR }}
@@ -15,15 +15,15 @@ jobs:
           AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
         run: |
           cml runner \
-            --cloud=aws \
-            --cloud-region=us-east \
+            --cloud aws \
+            --cloud-region us-east-2 \
             --cloud-type=t2.micro \
-            --labels=cml-cpu
+            --labels=cml-runner
   train-model:
     needs: deploy-runner
-    runs-on: [self-hosted, cml-cpu]
+    runs-on: [self-hosted, cml-runner]
     container:
-      image: docker://iterativeai/cml:0-dvc2-base1-cpu
+      image: docker://iterativeai/cml:0-dvc2-base1
     steps:
       - uses: actions/checkout@v2
       - name: Train model
@@ -32,6 +32,7 @@ jobs:
         run: |
           pip install --upgrade pip
           pip install -r requirements.txt
+          dvc repro -v
           
           echo '# REPORTS' >> report.md
           echo '## metrics' >> report.md
